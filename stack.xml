@@ -1,0 +1,14 @@
+<stack name="laser_drivers" version="0.1.0">
+  <description brief="laser_drivers">
+  This stack contains drivers for laser scanners.
+  </description>
+  <author>Blaise Gassend</author>
+  <license>BSD,LGPL</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/laser_drivers</url>
+  <depend stack="diagnostics"/> <!-- self_test, diagnostic_updater --> 
+  <depend stack="ros"/> <!-- roscpp --> 
+  <depend stack="driver_common"/> <!-- dynamic_reconfigure, driver_base --> 
+  <depend stack="common_msgs"/> <!-- sensor_msgs --> 
+
+</stack>
