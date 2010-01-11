@@ -1,6 +1,6 @@
 <stack>
   <description brief="laser_drivers">
-  This stack contains drivers for laser scanners.
+  This stack contains drivers for laser range-finders.
   </description>
   <author>Blaise Gassend</author>
   <license>BSD,LGPL</license>  
