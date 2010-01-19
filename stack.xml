@@ -1,10 +1,10 @@
 <stack>
-  <description brief="laser_drivers">
-  This stack contains drivers for laser range-finders.
+  <description brief="Laser drivers for Hokuyo and SICK laser rangefinders">
+  This stack contains drivers for laser rangefinders, including Hokuyo SCIP 2.0-compliant and SICK models.
   </description>
   <author>Blaise Gassend</author>
   <license>BSD,LGPL</license>  
-  <review status="unreviewed" notes=""/>
+  <review status="Doc reviewed" notes="2010/01/18"/>
   <url>http://ros.org/wiki/laser_drivers</url>
   <depend stack="common_msgs" /> <!-- sensor_msgs -->
   <depend stack="diagnostics" /> <!-- self_test, diagnostic_updater -->
