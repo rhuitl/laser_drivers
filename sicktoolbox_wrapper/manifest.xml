@@ -6,7 +6,7 @@
   <author>Morgan Quigley</author>
   <url>http://ros.org/wiki/sicktoolbox_wrapper</url>
   <license>BSD</license>
-  <review status="API cleared" notes="Dec 2009"/>
+  <review status="Doc reviewed" notes="Dec 2009"/>
   <depend package="sicktoolbox"/>
   <depend package="roscpp"/>
   <depend package="sensor_msgs"/>
