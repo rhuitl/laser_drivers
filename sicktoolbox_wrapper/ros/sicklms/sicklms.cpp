@@ -93,6 +93,8 @@ int main(int argc, char **argv)
 	string port;
 	int baud;
 	bool inverted;
+	int angle;
+	double resolution;
 	std::string frame_id;
 	double scan_time = 0;
 
@@ -102,6 +104,8 @@ int main(int argc, char **argv)
 	nh_ns.param("port", port, string("/dev/lms200"));
 	nh_ns.param("baud", baud, 38400);
 	nh_ns.param("inverted", inverted, false);
+	nh_ns.param("angle", angle, 180);
+	nh_ns.param("resolution", resolution, 0.5);
 	nh_ns.param<std::string>("frame_id", frame_id, "laser");
 
 	SickLMS::sick_lms_baud_t desired_baud = SickLMS::IntToSickBaud(baud);
@@ -118,6 +122,9 @@ int main(int argc, char **argv)
 	try
 	{
 		sick_lms.Initialize(desired_baud);
+		sick_lms.SetSickVariant(sick_lms.IntToSickScanAngle(angle),
+			sick_lms.DoubleToSickScanResolution(resolution));
+                ROS_INFO("Setting variant to (%i, %f)", angle, resolution);
 		SickLMS::sick_lms_measuring_units_t u = sick_lms.GetSickMeasuringUnits();
 		if (u == SickLMS::SICK_MEASURING_UNITS_CM)
 			scale = 0.01;
