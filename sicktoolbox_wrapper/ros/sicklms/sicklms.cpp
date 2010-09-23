@@ -124,8 +124,6 @@ int main(int argc, char **argv)
 
                 // Set the angle and resolution if possible (not an LMSFast) and
                 // the user specifies a setting.
-                if (sick_lms.IsSickLMSFast()) {
-                }
                 if (angle == 0)
                   angle = sick_lms.GetSickScanAngle();
                 if (resolution == 0.0)
@@ -137,10 +135,14 @@ int main(int argc, char **argv)
                 } catch (SickConfigException e) {
                   int actual_angle = sick_lms.GetSickScanAngle();
                   double actual_resolution = sick_lms.GetSickScanResolution();
-                  if (angle != actual_angle)
+                  if (angle != actual_angle) {
                     ROS_WARN("Unable to set scan angle. Using %i instead of %i.", actual_angle, angle);
-                  if (resolution != actual_resolution)
+                    angle = actual_angle;
+                  }
+                  if (resolution != actual_resolution) {
                     ROS_WARN("Unable to set resolution. Using %e instead of %e.", actual_resolution, resolution);
+                    resolution = actual_resolution;
+                  }
                 }
 
 		SickLMS::sick_lms_measuring_units_t u = sick_lms.GetSickMeasuringUnits();
