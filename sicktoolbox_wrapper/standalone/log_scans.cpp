@@ -34,7 +34,7 @@ extern "C" {
 #include <stdint.h>
 }
 #include <cstdio>
-#include <sicklms-1.0/SickLMS.hh>
+#include <sicklms2xx/SickLMS2xx.hh>
 #include <ros/time.h>
 using namespace SickToolbox;
 using namespace std;
@@ -59,16 +59,16 @@ int main(int argc, char **argv)
     return 1;
   }
   string lms_dev = argv[1];
-  SickLMS::sick_lms_baud_t desired_baud = SickLMS::StringToSickBaud(argv[2]);
-  if (desired_baud == SickLMS::SICK_BAUD_UNKNOWN)
+  SickLMS2xx::sick_lms_2xx_baud_t desired_baud = SickLMS2xx::StringToSickBaud(argv[2]);
+  if (desired_baud == SickLMS2xx::SICK_BAUD_UNKNOWN)
   {
     printf("bad baud rate. must be one of {9600, 19200, 38400, 500000}\n");
     return 1;
   }
   signal(SIGINT, ctrlc_handler);
-  uint32_t values[SickLMS::SICK_MAX_NUM_MEASUREMENTS] = {0};
+  uint32_t values[SickLMS2xx::SICK_MAX_NUM_MEASUREMENTS] = {0};
   uint32_t num_values = 0;
-  SickLMS sick_lms(lms_dev);
+  SickLMS2xx sick_lms(lms_dev);
   try
   {
     sick_lms.Initialize(desired_baud);

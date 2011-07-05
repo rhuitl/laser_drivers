@@ -32,7 +32,7 @@
 #include <csignal>
 #include <cstdio>
 #include <math.h>
-#include <sicklms-1.0/SickLMS.hh>
+#include <sicklms2xx/SickLMS2xx.hh>
 #include "ros/ros.h"
 #include "sensor_msgs/LaserScan.h"
 using namespace SickToolbox;
@@ -103,17 +103,17 @@ int main(int argc, char **argv)
 	nh_ns.param("resolution", resolution, 0.0);
 	nh_ns.param<std::string>("frame_id", frame_id, "laser");
 
-	SickLMS::sick_lms_baud_t desired_baud = SickLMS::IntToSickBaud(baud);
-	if (desired_baud == SickLMS::SICK_BAUD_UNKNOWN)
+	SickLMS2xx::sick_lms_2xx_baud_t desired_baud = SickLMS2xx::IntToSickBaud(baud);
+	if (desired_baud == SickLMS2xx::SICK_BAUD_UNKNOWN)
 	{
 		ROS_ERROR("Baud rate must be in {9600, 19200, 38400, 500000}");
 		return 1;
 	}
-	uint32_t range_values[SickLMS::SICK_MAX_NUM_MEASUREMENTS] = {0};
-  uint32_t intensity_values[SickLMS::SICK_MAX_NUM_MEASUREMENTS] = {0};
+	uint32_t range_values[SickLMS2xx::SICK_MAX_NUM_MEASUREMENTS] = {0};
+  uint32_t intensity_values[SickLMS2xx::SICK_MAX_NUM_MEASUREMENTS] = {0};
 	uint32_t n_range_values = 0;
   uint32_t n_intensity_values = 0;
-	SickLMS sick_lms(port);
+	SickLMS2xx sick_lms(port);
 	double scale = 0;
   double angle_offset;
   uint32_t partial_scan_index;
@@ -145,10 +145,10 @@ int main(int argc, char **argv)
                   }
                 }
 
-		SickLMS::sick_lms_measuring_units_t u = sick_lms.GetSickMeasuringUnits();
-		if (u == SickLMS::SICK_MEASURING_UNITS_CM)
+		SickLMS2xx::sick_lms_2xx_measuring_units_t u = sick_lms.GetSickMeasuringUnits();
+		if (u == SickLMS2xx::SICK_MEASURING_UNITS_CM)
 			scale = 0.01;
-		else if (u == SickLMS::SICK_MEASURING_UNITS_MM)
+		else if (u == SickLMS2xx::SICK_MEASURING_UNITS_MM)
 			scale = 0.001;
 		else
 		{
@@ -160,21 +160,21 @@ int main(int argc, char **argv)
     // for the mirror to rotate. If we have a higher resolution, the
     // SICKs interleave the readings, so the net result is we just
     // shift the measurements.
-    if (angle == 180 || sick_lms.IsSickLMSFast()) {
+    if (angle == 180 || sick_lms.IsSickLMS2xxFast()) {
       scan_time = 1.0 / 75;
     } 
     else {
-      SickLMS::sick_lms_scan_resolution_t scan_resolution =
-        SickLMS::DoubleToSickScanResolution(resolution);
-      if ( scan_resolution == SickLMS::SICK_SCAN_RESOLUTION_25) {
+      SickLMS2xx::sick_lms_2xx_scan_resolution_t scan_resolution =
+        SickLMS2xx::DoubleToSickScanResolution(resolution);
+      if ( scan_resolution == SickLMS2xx::SICK_SCAN_RESOLUTION_25) {
         // 0.25 degrees
         scan_time = 4.0 / 75;   // 53.33 ms
       }
-      else if ( scan_resolution == SickLMS::SICK_SCAN_RESOLUTION_50) {
+      else if ( scan_resolution == SickLMS2xx::SICK_SCAN_RESOLUTION_50) {
         // 0.5 degrees
         scan_time = 2.0 / 75;   // 26.66 ms
       }
-      else if ( scan_resolution == SickLMS::SICK_SCAN_RESOLUTION_100) {
+      else if ( scan_resolution == SickLMS2xx::SICK_SCAN_RESOLUTION_100) {
         // 1 degree
         scan_time = 1.0 / 75;   // 13.33 ms
       }
@@ -182,7 +182,7 @@ int main(int argc, char **argv)
         ROS_ERROR("Bogus scan resolution.");
         return 1;
       }
-      if ( scan_resolution != SickLMS::SICK_SCAN_RESOLUTION_100) {
+      if ( scan_resolution != SickLMS2xx::SICK_SCAN_RESOLUTION_100) {
         ROS_WARN("You are using an angle smaller than 180 degrees and a "
                  "scan resolution less than 1 degree per scan. Thus, "
                  "you are in inteleaved mode and the returns will not "
@@ -198,7 +198,7 @@ int main(int argc, char **argv)
     // 0.5 or 0.25 degrees resolution because it is interleaved. So for
     // 0.5 degrees, two scans are needed, offset by 0.5 degrees. These
     // show up as two seperate LaserScan messages.
-    angle_increment = sick_lms.IsSickLMSFast() ? 0.5 : 1.0;
+    angle_increment = sick_lms.IsSickLMS2xxFast() ? 0.5 : 1.0;
 
     angle_offset = (180.0-angle)/2;
 	}
@@ -212,7 +212,7 @@ int main(int argc, char **argv)
     ros::Time last_scan_time = ros::Time::now();
 		while (ros::ok())
 		{
-      if (sick_lms.IsSickLMSFast()) {
+      if (sick_lms.IsSickLMS2xxFast()) {
         // There's no inteleaving, but we can capture both the range
         // and intensity simultaneously
         sick_lms.GetSickScan(range_values, intensity_values,

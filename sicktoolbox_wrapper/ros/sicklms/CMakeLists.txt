@@ -1,1 +1,2 @@
-rosbuild_add_executable(sicklms sicklms.cpp)
+rosbuild_add_executable(sicklms_2xx sicklms2xx.cpp)
+rosbuild_add_executable(sicklms_5xx sicklms5xx.cpp)

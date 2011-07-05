@@ -1,16 +1,41 @@
 all: installed
 
-TARBALL = build/sicktoolbox-1.0.tar.gz
-TARBALL_URL = http://pr.willowgarage.com/downloads/sicktoolbox-1.0.tar.gz
-SOURCE_DIR = build/sicktoolbox-1.0
-#MD5SUM_FILE = sicktoolbox-1.0.tar.gz.md5sum
+TARBALL = build/d06e962457c220d5d04d207681039777f8ee46b0
+TARBALL_URL = https://github.com/rhuitl/sicktoolbox/tarball/d06e962457c220d5d04d207681039777f8ee46b0
+SOURCE_DIR = build/rhuitl-sicktoolbox-d06e962/trunk
+MD5SUM_FILE = d06e962457c220d5d04d207681039777f8ee46b0.md5sum
 UNPACK_CMD = tar xzf
-TARBALL_PATCH = stdlib_include.patch
+#TARBALL_PATCH = stdlib_include.patch
 
 include $(shell rospack find mk)/download_unpack_build.mk
 
+# override the extraction routing in download_unpack_build.mk
+$(SOURCE_DIR)/unpacked: $(TARBALL_PATCH)
+	-mkdir -p build
+ifneq ($(strip $(MD5SUM_FILE)),)
+	if [ ! -f $(MD5SUM_FILE) ]; then echo "Error: Couldn't find md5sum file $(MD5SUM_FILE)" && false; fi
+	`rospack find rosbuild`/bin/download_checkmd5.py $(TARBALL_URL) $(TARBALL) `awk {'print $$1'} $(MD5SUM_FILE)`
+else
+	`rospack find rosbuild`/bin/download_checkmd5.py $(TARBALL_URL) $(TARBALL)
+endif
+	touch -c $(TARBALL)
+	rm -rf $(SOURCE_DIR) $(INITIAL_DIR)
+ifneq ($(strip $(UNPACK_CMD)),)
+	cd build; $(UNPACK_CMD) ../$(TARBALL)
+else
+	cd build; tar xzf ../$(TARBALL)
+endif
+ifneq ($(strip $(INITIAL_DIR)),)
+	mv $(INITIAL_DIR) $(SOURCE_DIR)
+endif
+ifneq ($(strip $(TARBALL_PATCH)),)
+	cd $(SOURCE_DIR) && $(foreach patch,$(TARBALL_PATCH), patch -p0 < ../../../$(patch);)
+endif
+	touch $(SOURCE_DIR)/unpacked
+
+
 installed: wiped $(SOURCE_DIR)/unpacked
-	cd $(SOURCE_DIR) && ./configure --prefix=`rospack find sicktoolbox`/sicktoolbox
+	cd $(SOURCE_DIR) && autoreconf -i && ./configure --prefix=`rospack find sicktoolbox`/sicktoolbox
 	cd $(SOURCE_DIR) && make && make install
 	touch installed
 
@@ -19,10 +44,10 @@ wiped: Makefile
 	touch wiped
 
 clean:
-	-rm -rf sicktoolbox-1.0 sicktoolbox
+	-rm -rf sicktoolbox-1.0 sicktoolbox build/rhuitl-sicktoolbox-d06e962
 	rm -f *~ installed
 
 .PHONY : clean wipe
 
 wipe: clean
-	rm -f sicktoolbox-1.0.tar.gz
+	rm -f build/d06e962457c220d5d04d207681039777f8ee46b0
