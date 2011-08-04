@@ -10,7 +10,7 @@
 <review status="3rdparty doc reviewed" notes=""/>
 <url>http://sicktoolbox.sourceforge.net</url>
 <export>
-  <cpp lflags="-Wl,-rpath,${prefix}/sicktoolbox/lib -L${prefix}/sicktoolbox/lib -lsicklms2xx -lsicklms5xx" cflags="-I${prefix}/sicktoolbox/include"/>
+  <cpp lflags="-Wl,-rpath,${prefix}/sicktoolbox/lib -L${prefix}/sicktoolbox/lib -lsicklms1xx -lsicklms2xx -lsicklms5xx" cflags="-I${prefix}/sicktoolbox/include"/>
    <doxymaker external="http://sicktoolbox.sourceforge.net"/>
 </export>
   <platform os="ubuntu" version="9.04"/>

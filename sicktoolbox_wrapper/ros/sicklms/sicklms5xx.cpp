@@ -84,7 +84,7 @@ int main(int argc, char **argv)
 	ros::init(argc, argv, "sicklms5xx");
 	string port;
 	int baud;
-	bool inverted;
+	bool inverted = false;
 	int angle;
 	double resolution;
 	std::string frame_id;
@@ -103,23 +103,23 @@ int main(int argc, char **argv)
 	nh_ns.param("resolution", resolution, 0.0);
 	nh_ns.param<std::string> ("frame_id", frame_id, "laser");
 
-	uint32_t range_values[SickLMS5xx::SICK_LMS_5xx_MAX_NUM_MEASUREMENTS] = { 0 };
-	uint32_t intensity_values[SickLMS5xx::SICK_LMS_5xx_MAX_NUM_MEASUREMENTS] = { 0 };
+	uint32_t range_values[SickLMS5xx::SICK_LMS_5XX_MAX_NUM_MEASUREMENTS] = { 0 };
+	uint32_t intensity_values[SickLMS5xx::SICK_LMS_5XX_MAX_NUM_MEASUREMENTS] = { 0 };
 	uint32_t n_range_values = 0;
 	uint32_t n_intensity_values = 0;
-	SickLMS5xx sick_lms;
+	SickLMS5xx sick_lms("192.168.0.1");
 	double scale = 0;
 	double angle_offset;
 	uint32_t partial_scan_index;
 
 	try {
 		sick_lms.Initialize();
-		sick_lms.SetSickScanFreqAndRes(SickLMS5xx::SICK_LMS_5xx_SCAN_FREQ_25,
-		                                       SickLMS5xx::SICK_LMS_5xx_SCAN_RES_17);
-		/*sick_lms.SetSickScanFreqAndRes(SickLMS5xx::SICK_LMS_5xx_SCAN_FREQ_25,
-		                               SickLMS5xx::SICK_LMS_5xx_SCAN_RES_25);*/
-		//sick_lms.SetSickEchoFilter(SickLMS5xx::SICK_LMS_5xx_ECHO_FILTER_ALL_ECHOES);
-		sick_lms.SetSickEchoFilter(SickLMS5xx::SICK_LMS_5xx_ECHO_FILTER_FIRST);
+		sick_lms.SetSickScanFreqAndRes(SickLMS5xx::SICK_LMS_5XX_SCAN_FREQ_25,
+		                                       SickLMS5xx::SICK_LMS_5XX_SCAN_RES_17);
+		/*sick_lms.SetSickScanFreqAndRes(SickLMS5xx::SICK_LMS_5XX_SCAN_FREQ_25,
+		                               SickLMS5xx::SICK_LMS_5XX_SCAN_RES_25);*/
+		//sick_lms.SetSickEchoFilter(SickLMS5xx::SICK_LMS_5XX_ECHO_FILTER_ALL_ECHOES);
+		sick_lms.SetSickEchoFilter(SickLMS5xx::SICK_LMS_5XX_ECHO_FILTER_FIRST);
 
 		// Scale is mm with the 5xx driver
 		scale = 0.001;
@@ -171,8 +171,8 @@ int main(int argc, char **argv)
 	try {
 		ros::Time last_scan_time = ros::Time::now();
 		while(ros::ok()) {
-			angle_min =  -5. * M_PI / 180.0;
-			angle_max = 185. * M_PI / 180.0;
+			angle_min = sick_lms.GetSickStartAngle() * M_PI / 180.0;
+			angle_max = sick_lms.GetSickStopAngle()  * M_PI / 180.0;
 
 			sick_lms.GetSickMeasurements(range_values, NULL, NULL, NULL, NULL,
 			                             NULL, NULL, NULL, NULL, NULL,

@@ -1,9 +1,9 @@
 all: installed
 
-TARBALL = build/d06e962457c220d5d04d207681039777f8ee46b0
-TARBALL_URL = https://github.com/rhuitl/sicktoolbox/tarball/d06e962457c220d5d04d207681039777f8ee46b0
-SOURCE_DIR = build/rhuitl-sicktoolbox-d06e962/trunk
-MD5SUM_FILE = d06e962457c220d5d04d207681039777f8ee46b0.md5sum
+TARBALL = build/9a43f4ffc2aee65f669430ae05b7e132ec37888d
+TARBALL_URL = https://github.com/rhuitl/sicktoolbox/tarball/9a43f4ffc2aee65f669430ae05b7e132ec37888d
+SOURCE_DIR = build/rhuitl-sicktoolbox-9a43f4f/trunk
+MD5SUM_FILE = 9a43f4ffc2aee65f669430ae05b7e132ec37888d.md5sum
 UNPACK_CMD = tar xzf
 #TARBALL_PATCH = stdlib_include.patch
 
@@ -44,10 +44,10 @@ wiped: Makefile
 	touch wiped
 
 clean:
-	-rm -rf sicktoolbox-1.0 sicktoolbox build/rhuitl-sicktoolbox-d06e962
+	-rm -rf sicktoolbox-1.0 sicktoolbox build/rhuitl-sicktoolbox-9a43f4f
 	rm -f *~ installed
 
 .PHONY : clean wipe
 
 wipe: clean
-	rm -f build/d06e962457c220d5d04d207681039777f8ee46b0
+	rm -f build/9a43f4ffc2aee65f669430ae05b7e132ec37888d
