@@ -62,11 +62,7 @@ void publish_scan(ros::Publisher *pub, uint32_t *range_values,
 	scan_msg.scan_time = scan_time;
 	scan_msg.time_increment = scan_time / (2 * M_PI) * scan_msg.angle_increment;
 	scan_msg.range_min = 0;
-	if(scale == 0.01) {
-		scan_msg.range_max = 81;
-	} else if(scale == 0.001) {
-		scan_msg.range_max = 8.1;
-	}
+	scan_msg.range_max = 21.;      // Note: change to 51. for the LMS 151
 	scan_msg.ranges.resize(n_range_values);
 	scan_msg.header.stamp = start;
 	for(size_t i = 0; i < n_range_values; i++) {
