@@ -167,8 +167,13 @@ int main(int argc, char **argv)
 	try {
 		ros::Time last_scan_time = ros::Time::now();
 		while(ros::ok()) {
-			angle_min = sick_lms.GetSickStartAngle() * M_PI / 180.0;
-			angle_max = sick_lms.GetSickStopAngle()  * M_PI / 180.0;
+//			angle_min = sick_lms.GetSickStartAngle() * M_PI / 180.0;
+//			angle_max = sick_lms.GetSickStopAngle()  * M_PI / 180.0;
+
+                        // Rotate the coordinate system so we get a range [-95;95] instead of [-5;185].
+                        // Avoids the need to manually rotate the laser scanner in the URDF.
+			angle_min = (sick_lms.GetSickStartAngle()-90.) * M_PI / 180.0;
+			angle_max = (sick_lms.GetSickStopAngle()-90.)  * M_PI / 180.0;
 
 			sick_lms.GetSickMeasurements(range_values, NULL, NULL, NULL, NULL,
 			                             NULL, NULL, NULL, NULL, NULL,
