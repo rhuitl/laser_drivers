@@ -1,9 +1,8 @@
 all: installed
-
-TARBALL = build/9a43f4ffc2aee65f669430ae05b7e132ec37888d
-TARBALL_URL = https://github.com/rhuitl/sicktoolbox/tarball/9a43f4ffc2aee65f669430ae05b7e132ec37888d
-SOURCE_DIR = build/rhuitl-sicktoolbox-9a43f4f/trunk
-MD5SUM_FILE = 9a43f4ffc2aee65f669430ae05b7e132ec37888d.md5sum
+TARBALL = build/743981833845e9ffbd0041bf5a2c04a277454cc1
+TARBALL_URL = https://github.com/rhuitl/sicktoolbox/tarball/743981833845e9ffbd0041bf5a2c04a277454cc1
+SOURCE_DIR = build/rhuitl-sicktoolbox-7439818/trunk
+MD5SUM_FILE = 743981833845e9ffbd0041bf5a2c04a277454cc1.md5sum
 UNPACK_CMD = tar xzf
 #TARBALL_PATCH = stdlib_include.patch
 
