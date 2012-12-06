@@ -7,7 +7,7 @@
   <url>http://ros.org/wiki/sicktoolbox_wrapper</url>
   <license>BSD</license>
   <review status="Doc reviewed" notes="Dec 2009"/>
-  <depend package="sicktoolbox"/>
+  <depend package="sicktoolbox2"/>
   <depend package="roscpp"/>
   <depend package="sensor_msgs"/>
   <platform os="ubuntu" version="9.04"/>

@@ -34,7 +34,7 @@ endif
 
 
 installed: wiped $(SOURCE_DIR)/unpacked
-	cd $(SOURCE_DIR) && autoreconf -i && ./configure --prefix=`rospack find sicktoolbox`/sicktoolbox
+	cd $(SOURCE_DIR) && autoreconf -i && ./configure --prefix=`rospack find sicktoolbox2`/sicktoolbox
 	cd $(SOURCE_DIR) && make && make install
 	touch installed
 
