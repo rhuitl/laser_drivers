@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(sicktoobox_wrapper2)
+project(sicktoolbox_wrapper2)
 
 find_package(
     catkin REQUIRED COMPONENTS 
