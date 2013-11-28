@@ -33,7 +33,7 @@
 #include <csignal>
 #include <cstdio>
 #include <math.h>
-#include <sicklms1xx/SickLMS1xx.hh>
+#include <sicktoolbox2/SickLMS1xx.hh>
 #include "ros/ros.h"
 #include "sensor_msgs/LaserScan.h"
 using namespace SickToolbox;
