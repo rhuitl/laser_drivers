@@ -42,5 +42,8 @@ target_link_libraries(SickLMS2xx ${catkin_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 add_library(SickLMS5xx src/drivers/lms5xx/sicklms5xx/SickLMS5xx.cc src/drivers/lms5xx/sicklms5xx/SickLMS5xxBufferMonitor.cc src/drivers/lms5xx/sicklms5xx/SickLMS5xxMessage.cc)
 target_link_libraries(SickLMS5xx ${catkin_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
-
-
+install(TARGETS SickLD SickLMS1xx SickLMS2xx SickLMS5xx
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
