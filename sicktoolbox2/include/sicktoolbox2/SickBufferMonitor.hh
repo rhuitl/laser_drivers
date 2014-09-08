@@ -20,6 +20,7 @@
 #include <iostream>
 #include <pthread.h>
 #include "SickException.hh"
+#include <unistd.h>
 
 /* Associate the namespace */
 namespace SickToolbox {

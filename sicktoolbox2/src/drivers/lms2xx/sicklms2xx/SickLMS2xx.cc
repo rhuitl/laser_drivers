@@ -22,6 +22,7 @@
 #include <termios.h>
 #include <sys/ioctl.h>
 #include <signal.h>
+#include <unistd.h>
 
 #include "SickLMS2xx.hh"
 #include "SickLMS2xxMessage.hh"

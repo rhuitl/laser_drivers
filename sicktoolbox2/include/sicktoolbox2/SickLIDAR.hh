@@ -37,6 +37,7 @@
 #include <iostream>
 #include <fcntl.h>
 #include <pthread.h>
+#include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/time.h>
 #include "SickException.hh"
