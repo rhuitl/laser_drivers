@@ -34,6 +34,7 @@
 #include <vector>             // for returning the results of parsed strings
 #include <errno.h>            // for timing connect()
 #include <cstdio>                // to get sscanf
+#include <unistd.h>
 
 #include "SickLMS5xx.hh"
 #include "SickLMS5xxMessage.hh"

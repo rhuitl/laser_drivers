@@ -20,6 +20,7 @@
 /* Implementation dependencies */
 #include <iostream>
 #include <sys/ioctl.h>
+#include <unistd.h>
 
 #include "SickLMS5xxBufferMonitor.hh"
 #include "SickLMS5xxMessage.hh"

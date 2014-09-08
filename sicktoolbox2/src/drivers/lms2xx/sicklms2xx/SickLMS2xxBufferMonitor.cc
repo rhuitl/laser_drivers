@@ -20,6 +20,7 @@
 /* Implementation dependencies */
 #include <iostream>
 #include <termios.h>
+#include <unistd.h>
 
 #include "SickLMS2xx.hh"
 #include "SickLMS2xxBufferMonitor.hh"
