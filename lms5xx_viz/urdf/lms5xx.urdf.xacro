@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="lms5xx">
+
+    <xacro:macro name="lms5xx" params="parent prefix ">
+
+        <joint name="${prefix}lms5xx_link_joint" type="fixed" >
+            <origin xyz="0 0 0" rpy="0.0 0.0 0.0"/>
+	           <parent link="${parent}" />
+            <child link="${prefix}lms5xx_link" />
+        </joint>
+
+        <link name="${prefix}lms5xx_link">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://lms5xx_viz/meshes/lms5xx.dae" />
+                </geometry>
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <mesh filename="package://lms5xx_viz/meshes/lms5xx.dae" />
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${prefix}lms5xx_laser_joint" type="fixed" >
+            <origin xyz="0.093 0 0.063" rpy="0.0 0.0 0.0"/>
+             <parent link="${prefix}lms5xx_link" />
+            <child link="${prefix}laser" />
+        </joint>
+
+        <link name="${prefix}laser" />
+    </xacro:macro>
+</robot>

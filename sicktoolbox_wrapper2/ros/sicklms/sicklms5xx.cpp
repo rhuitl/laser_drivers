@@ -33,7 +33,7 @@
 #include <csignal>
 #include <cstdio>
 #include <math.h>
-#include <sicklms5xx/SickLMS5xx.hh>
+#include <sicktoolbox2/SickLMS5xx.hh>
 #include "ros/ros.h"
 #include "sensor_msgs/LaserScan.h"
 using namespace SickToolbox;
@@ -84,6 +84,7 @@ int main(int argc, char **argv)
 	int angle;
 	double resolution;
 	std::string frame_id;
+	std::string ip_add;
 	double scan_time = 0;
 	double angle_increment = 0;
 	float angle_min = 0.0;
@@ -97,13 +98,14 @@ int main(int argc, char **argv)
 	//nh_ns.param("inverted", inverted, false);
 	nh_ns.param("angle", angle, 0);
 	nh_ns.param("resolution", resolution, 0.0);
+	nh_ns.param<std::string>("ip_add", ip_add, "192.168.0.1");
 	nh_ns.param<std::string> ("frame_id", frame_id, "laser");
 
 	uint32_t range_values[SickLMS5xx::SICK_LMS_5XX_MAX_NUM_MEASUREMENTS] = { 0 };
 	uint32_t intensity_values[SickLMS5xx::SICK_LMS_5XX_MAX_NUM_MEASUREMENTS] = { 0 };
 	uint32_t n_range_values = 0;
 	uint32_t n_intensity_values = 0;
-	SickLMS5xx sick_lms("192.168.0.1");
+	SickLMS5xx sick_lms(ip_add);
 	double scale = 0;
 	double angle_offset;
 	uint32_t partial_scan_index;

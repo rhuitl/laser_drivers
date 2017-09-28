@@ -36,7 +36,7 @@ extern "C" {
 #include <stdint.h>
 }
 #include <cstdio>
-#include <sicklms2xx/SickLMS2xx.hh>
+#include <sicktoolbox2/SickLMS2xx.hh>
 using namespace SickToolbox;
 using namespace std;
 

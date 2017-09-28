@@ -1,5 +1,20 @@
-cmake_minimum_required(VERSION 2.4.6)
-include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
-rosbuild_init()
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+cmake_minimum_required(VERSION 2.8.3)
+project(sicktoolbox_wrapper2)
+
+find_package(
+    catkin REQUIRED COMPONENTS 
+    sensor_msgs roscpp sicktoolbox2
+)
+find_package(Threads REQUIRED)
+
+catkin_package(
+  INCLUDE_DIRS
+  LIBRARIES 
+  CATKIN_DEPENDS sensor_msgs roscpp sicktoolbox2
+  DEPENDS system_lib Threads
+)
+
+include_directories(${catkin_INCLUDE_DIRS})
+link_libraries(${catkin_LIBRARIES})
+
 subdirs(standalone ros)

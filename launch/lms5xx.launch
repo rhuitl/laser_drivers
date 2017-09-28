@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="sicktoolbox_wrapper2" name="lms5xx" type="sicklms_5xx" ns="lidar">
+    <param name="ip_add" value="192.168.1.14" />
+    <param name="frame_id" value="lidar" />
+  </node>
+</launch>

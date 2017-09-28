@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+  <name>sicktoolbox_wrapper2</name>
+  <version>0.0.0</version>
+  <description>The sicktoolbox_wrapper2 package</description>
+  <maintainer email="yanma@clearpathrobotics.com">yanma</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>sicktoolbox2</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+
+  <run_depend>sicktoolbox2</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>roscpp</run_depend>
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export></export>
+</package>

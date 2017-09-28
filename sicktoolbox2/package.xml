@@ -1,0 +1,20 @@
+<package>
+  <name>sicktoolbox2</name>
+  <version>0.0.0</version>
+  <description>
+
+    This package contains the SICK LIDAR Matlab/C++ Toolbox, available from <a href="http://sicktoolbox.sourceforge.net/">http://sicktoolbox.sourceforge.net/</a>.
+    The SICK LIDAR Matlab/C++ Toolbox offers stable and easy-to-use C++ drivers for SICK LMS 2xx and SICK LD LIDARs. It provides a Matlab Mex interface for streaming LIDAR returns directly into Matlab. Also included are config utilities, examples, and tutorials. This package contains version 1.0 of the toolbox.
+
+  </description>
+  <author>Jason Derenick of the GRASP Laboratory at the University of Pennsylvania</author>
+  <maintainer email="yanma@clearpathrobotics.com">yanma</maintainer>
+  <license>BSD</license>
+  <url>http://sicktoolbox.sourceforge.net</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+  </export>
+</package>
+

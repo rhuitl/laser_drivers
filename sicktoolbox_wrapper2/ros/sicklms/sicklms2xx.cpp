@@ -32,7 +32,7 @@
 #include <csignal>
 #include <cstdio>
 #include <math.h>
-#include <sicklms2xx/SickLMS2xx.hh>
+#include <sicktoolbox2/SickLMS2xx.hh>
 #include "ros/ros.h"
 #include "sensor_msgs/LaserScan.h"
 using namespace SickToolbox;
@@ -88,6 +88,7 @@ int main(int argc, char **argv)
   int angle;
   double resolution;
 	std::string frame_id;
+	std::string ip_add;
 	double scan_time = 0;
   double angle_increment = 0;
   float angle_min = 0.0;
